@@ -60,7 +60,7 @@
   var D = document.createElement('iframe')
   D.src = `https://www.youtube.com/embed/${V[0]}`
   D.allow = 'fullscreen'
-  D.allow = 'accelerometer;autoplay;gyroscope;picture-in-picture'
+  D.allow = 'autoplay'
   document.getElementById('screen').append(D)
 
   var p = document.createElement('p')
@@ -176,15 +176,19 @@
         }
         let div = document.createElement('div')
         div.style.overflow = 'hidden'
+        let d3 = document.createElement('div')
         let img = document.createElement('img')
+        img.style.width = '150px'
+        d3.append(img)
         img.src = ima
-        img.style.width = '100%'
-
+        img.setAttribute('class', 'IMGA')
+        let d2 = document.createElement('div')
         let h3 = document.createElement('h3')
         h3.innerText = Vtit
         let h5 = document.createElement('h5')
         h5.innerText = Tit
-        div.append(img, h3, h5)
+        d2.append(h3, h5)
+        div.append(d3, d2)
         BUT.append(div)
         sen.append(BUT)
       })
