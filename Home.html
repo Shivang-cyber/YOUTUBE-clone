@@ -48,7 +48,7 @@
   async function Leq() {
     try {
       let resp = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&location=26.4499%2C%2080.3319&locationRadius=50km&maxResults=50&order=relevance&type=video&parentId=UgzDE2tasfmrYLyNkGt4AaABAg&key=AIzaSyD6E8-u2JjDNIqEj8egJfMP3xnu68pZctg`
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&location=26.4499%2C%2080.3319&locationRadius=50km&maxResults=50&order=relevance&type=video&parentId=UgzDE2tasfmrYLyNkGt4AaABAg&key=AIzaSyD0wGi3lv7Kb0K1YXeq8dX6gw59t_Uo__I`
       )
       let data = await resp.json()
       console.log(data)
@@ -107,7 +107,7 @@
     try {
       var inp = document.getElementById('srch').value
       let resp = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?q=${inp}&part=snippet&maxResults=50&order=relevance&type=video&parentId=UgzDE2tasfmrYLyNkGt4AaABAg&key=AIzaSyD6E8-u2JjDNIqEj8egJfMP3xnu68pZctg`
+        `https://youtube.googleapis.com/youtube/v3/search?q=${inp}&part=snippet&maxResults=50&order=relevance&type=video&parentId=UgzDE2tasfmrYLyNkGt4AaABAg&key=AIzaSyD0wGi3lv7Kb0K1YXeq8dX6gw59t_Uo__I`
       )
       let data = await resp.json()
       console.log(data)
