@@ -33,9 +33,7 @@
               <p></p>
               <input type="text" placeholder="Add a public comment..." />
             </div>
-            <div id="restCom">
-              
-            </div>
+            <div id="restCom"></div>
           </div>
         </div>
         <div id="list"></div>
@@ -79,7 +77,7 @@
   async function Preq() {
     try {
       let res = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${V[0]}&key=AIzaSyBLOOeuHn-jZPuPoiBK_yyizFFFRowI710`
+        `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${V[0]}&key=AIzaSyD6E8-u2JjDNIqEj8egJfMP3xnu68pZctg`
       )
       let data = await res.json()
       let detes = data.items[0].statistics
@@ -110,46 +108,89 @@
     }
   }
   Preq()
-var divs = document.getElementById('restCom')
+
+  var divs = document.getElementById('restCom')
   // COMMENT
   async function REKT() {
     try {
       let reso = await fetch(
-        `https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBLOOeuHn-jZPuPoiBK_yyizFFFRowI710&textFormat=plainText&part=snippet&videoId=${V[0]}&maxResults=50`
+        `https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyD6E8-u2JjDNIqEj8egJfMP3xnu68pZctg&textFormat=plainText&part=snippet&videoId=${V[0]}&maxResults=50`
       )
       let data = await reso.json()
-      
- data.items.map(function(s) {
- var NAME = s.snippet.topLevelComment.snippet.authorDisplayName
- var NAME_im = s.snippet.topLevelComment.snippet.authorProfileImageUrl
-  var NAME_COM = s.snippet.topLevelComment.snippet.textDisplay
-   var NAME_L = s.snippet.topLevelComment.snippet.likeCount
 
-   var d = document.createElement('div')
-   var d1 = document.createElement('div')
-   var pp = document.createElement('p')
-   var p_img = document.createElement('img')
-   p_img.src = NAME_im
-   pp.append(p_img)
-   d1.append(pp)
-   var d2 = document.createElement('div')
-   var h3 = document.createElement('h3')
-   h3.innerHTML = NAME
-   var h5 = document.createElement('h5')
-   h5.innerHTML = NAME_COM
-   d2.append(h3,h5)
-d.append(d1,d2)
-divs.append(d)
+      data.items.map(function (s) {
+        var NAME = s.snippet.topLevelComment.snippet.authorDisplayName
+        var NAME_im = s.snippet.topLevelComment.snippet.authorProfileImageUrl
+        var NAME_COM = s.snippet.topLevelComment.snippet.textDisplay
+        var NAME_L = s.snippet.topLevelComment.snippet.likeCount
 
-
-
-
-
- })
+        var d = document.createElement('div')
+        var d1 = document.createElement('div')
+        var pp = document.createElement('p')
+        var p_img = document.createElement('img')
+        p_img.src = NAME_im
+        pp.append(p_img)
+        d1.append(pp)
+        var d2 = document.createElement('div')
+        var h3 = document.createElement('h3')
+        h3.innerHTML = NAME
+        var h5 = document.createElement('h5')
+        h5.innerHTML = NAME_COM
+        d2.append(h3, h5)
+        d.append(d1, d2)
+        divs.append(d)
+      })
     } catch (err) {
       console.log(err)
     }
   }
 
   REKT()
+
+  var sen = document.getElementById('list')
+  async function QReq() {
+    try {
+      var inp = localStorage.getItem('INP')
+
+      let resp = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?q=${inp}&part=snippet&maxResults=50&order=relevance&type=video&parentId=UgzDE2tasfmrYLyNkGt4AaABAg&key=AIzaSyD6E8-u2JjDNIqEj8egJfMP3xnu68pZctg`
+      )
+      let data = await resp.json()
+      console.log(data)
+      data.items.map(function (i) {
+        console.log(i)
+
+        var vid = i.id.videoId
+
+        var Tit = i.snippet.channelTitle
+        var dat = i.snippet.publishedAt
+        var ima = i.snippet.thumbnails.medium.url
+        var Vtit = i.snippet.title
+        var des = i.snippet.description
+        let BUT = document.createElement('button')
+        BUT.style.border = 'none'
+        BUT.onclick = function () {
+          var AB = [vid, Vtit, dat, Tit, des]
+          window.open('vi_hollow.html')
+          localStorage.setItem('VID_ID', JSON.stringify(AB))
+        }
+        let div = document.createElement('div')
+        div.style.overflow = 'hidden'
+        let img = document.createElement('img')
+        img.src = ima
+        img.style.width = '100%'
+
+        let h3 = document.createElement('h3')
+        h3.innerText = Vtit
+        let h5 = document.createElement('h5')
+        h5.innerText = Tit
+        div.append(img, h3, h5)
+        BUT.append(div)
+        sen.append(BUT)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  QReq()
 </script>
